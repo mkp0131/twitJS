@@ -1,0 +1,62 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  max-width: 300px;
+}
+
+.Form label {
+  width: 100%;
+}
+
+.Form label h3 {
+  margin-bottom: 0.5em;
+}
+
+.Form input {
+  font-size: 1.5rem;
+  width: 100%;
+}
+
+.Form button[type='submit'] {
+  width: 100%;
+  font-size: 1rem;
+  height: 60px;
+  background: var(--main-color1);
+  color: var(--font-color1);
+  font-weight: 900;
+  margin-top: 1em;
+}
+
+.Form button[type='submit'].BtnJoin {
+  background: var(--font-color2);
+}
+
+.Form .AuthErr {
+  color: var(--font-color2);
+  text-align: center;
+}
+
+.SignInContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  width: 100%;
+  padding-top: 1.5em;
+  margin-top: 1em;
+  border-top: 1px solid var(--font-color1);
+}
+.SignInContainer button {
+  width: 100%;
+  padding: 1em;
+}
+
+.Logo {
+  width: 150px;
+  margin-bottom: 1em;
+}
+.Logo svg path {
+  fill: var(--main-color1);
+}
