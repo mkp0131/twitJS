@@ -1,0 +1,38 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--main-color1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Form textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  padding: 1em;
+  resize: none;
+}
+.Form button[type='submit'] {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: var(--main-color1);
+  color: #fff;
+  font-weight: 700;
+}
+
+.NewTwitContainer h2 {
+  margin: 0;
+  padding-left: 0.2em;
+  margin-bottom: 0.5em;
+  color: var(--main-color1);
+}
+.TwitList h3 {
+  margin: 0;
+  padding-left: 0.2em;
+  margin-bottom: 0.5em;
+}

@@ -4,6 +4,8 @@
   --main-color1: #239fdc;
   --font-color1: #fff;
   --font-color2: #eb4034;
+  --font-color3: #000;
+  --bg-color1: #212121;
 }
 
 html,
@@ -38,6 +40,11 @@ svg {
   height: auto !important;
   vertical-align: top;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
+
 .app_contaier {
   display: grid;
   grid-template-rows: auto 100px;
@@ -59,4 +66,10 @@ svg {
   justify-content: center;
   flex-direction: column;
   padding: 3em 10px;
+}
+
+.in-container {
+  max-width: 569px;
+  padding: 1em 10px;
+  margin: 0 auto;
 }

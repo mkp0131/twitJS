@@ -13,7 +13,7 @@ import {
   doc,
   onSnapshot,
 } from 'firebase/firestore';
-import { async } from '@firebase/util';
+import Twit from 'components/Twit/Twit';
 
 const Home = () => {
   const [twit, setTwit] = useState('');
@@ -24,39 +24,25 @@ const Home = () => {
   // db collection
   const cl = collection(db, 'twits');
 
+  const qr = query(
+    cl,
+    where('delete', '==', 'N'),
+    orderBy('createdAt', 'desc'),
+    limit(10)
+  );
+
   useEffect(() => {
-    getTwitList();
-
-    console.log('------');
-    const unsub = onSnapshot(cl, (data) => {
-      data.forEach((doc) => {
-        console.log(doc.data().twit);
-      });
-    });
-  }, []);
-
-  const getTwitList = async () => {
-    let result = [];
-    try {
-      const qr = query(
-        cl,
-        where('delete', '==', 'N'),
-        orderBy('createdAt', 'desc'),
-        limit(10)
-      );
-      const data = await getDocs(qr);
+    const unsub = onSnapshot(qr, (data) => {
+      let result = [];
       data.forEach((doc) => {
         result.push({
           id: doc.id,
           ...doc.data(),
         });
       });
-    } catch (error) {
-      console.log(error);
-    }
-    setTwitList(result);
-    return result;
-  };
+      setTwitList(result);
+    });
+  }, []);
 
   const onChange = (event) => {
     event.preventDefault();
@@ -65,6 +51,7 @@ const Home = () => {
     } = event;
     setTwit(value);
   };
+
   const onSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -75,47 +62,29 @@ const Home = () => {
         delete: 'N',
       });
       setTwit('');
-      getTwitList();
     } catch (error) {
       console.log(error);
     }
   };
-  const onClickDelete = async (event, twit) => {
-    event.preventDefault();
-
-    console.log(twit);
-    // await setDoc(doc(db, 'twits', id), {
-    //   delete: 'Y',
-    // });
-  };
-  const onClickModify = (event) => {
-    event.preventDefault();
-  };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input type="text" name="twit" value={twit} onChange={onChange} />
-        <button type="submit">보내기</button>
-      </form>
-      <ul>
-        {twitList.map((twit) => (
-          <li key={twit.id}>
-            {twit.twit}
-            {twit.creatorId === userUid && (
-              <div>
-                <button onClick={(event) => onClickModify(event, twit)}>
-                  수정
-                </button>
-                <button onClick={(event) => onClickDelete(event, twit)}>
-                  삭제
-                </button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className="in-container">
+      <div className={styles.NewTwitContainer}>
+        <h2>새글 작성</h2>
+        <form onSubmit={onSubmit} className={styles.Form}>
+          <textarea name="twit" value={twit} onChange={onChange} />
+          <button type="submit">글 작성</button>
+        </form>
+      </div>
+      <div className={styles.TwitList}>
+        <h2>글 목록</h2>
+        <ul>
+          {twitList.map((twit) => (
+            <Twit key={twit.id} twit={twit} userUid={userUid} />
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 };
 

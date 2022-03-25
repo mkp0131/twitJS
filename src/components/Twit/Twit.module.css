@@ -1,0 +1,70 @@
+.Twit {
+  width: 100%;
+  border-bottom: 1px solid #666;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  white-space: pre-wrap;
+}
+.Twit .TwitTxt {
+  padding: 1em;
+}
+
+.Twit textarea {
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  padding: 1em;
+  resize: none;
+}
+.Twit form {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid var(--font-color2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.Twit form button[type='submit'] {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  background: var(--font-color2);
+  color: #fff;
+  font-weight: 700;
+}
+
+.ModifyContainer {
+  display: none;
+  margin-bottom: 1em;
+}
+.ModifyContainer h3 {
+  margin: 0;
+  padding-left: 0.2em;
+  color: var(--font-color2);
+  margin-bottom: 0.5em;
+}
+.TwitModify .ModifyContainer {
+  display: block;
+}
+
+.Twit textarea::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+.TwitBtnContainer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  margin-top: 0.5em;
+}
+.TwitBtnContainer button {
+  background: none;
+  border: none;
+  color: var(--font-color1);
+  padding: 0.2em 1em;
+}
+.TwitBtnContainer button:last-child {
+  color: var(--font-color2);
+}
