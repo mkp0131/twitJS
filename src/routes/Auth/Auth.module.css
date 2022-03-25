@@ -51,11 +51,20 @@
 .SignInContainer button {
   width: 100%;
   padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fffec1;
+  font-weight: 700;
+}
+.SignInContainer button .BtnIcon {
+  width: 15px;
+  margin-right: 5px;
+  opacity: 0.8;
 }
 
 .Logo {
   width: 150px;
-  margin-bottom: 1em;
 }
 .Logo svg path {
   fill: var(--main-color1);

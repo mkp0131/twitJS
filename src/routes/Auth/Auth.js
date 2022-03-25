@@ -1,11 +1,22 @@
 import { auth } from 'fbInstance';
-import Logo from 'components/Logo';
 import {
+  signInWithPopup,
+  GithubAuthProvider,
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faGithub,
+  faGoogle,
+  faTwitter,
+} from '@fortawesome/free-brands-svg-icons';
+import { faAt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import styles from './Auth.module.css';
+import Logo from 'components/Logo';
+import { async } from '@firebase/util';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -53,6 +64,25 @@ const Auth = () => {
     setAuthMode('join');
   };
 
+  const onClickSocialJoin = async (social) => {
+    // 공급자 선택
+    let provider;
+    if (social === 'github') {
+      provider = new GithubAuthProvider();
+    } else if (social === 'google') {
+      provider = new GoogleAuthProvider();
+    } else {
+      return;
+    }
+
+    // 회원가입 처리
+    try {
+      const signResult = await signInWithPopup(auth, provider);
+    } catch (error) {
+      setAuthErr(error.message);
+    }
+  };
+
   return (
     <div className="ct-container">
       <form onSubmit={onSubmit} className={styles.Form}>
@@ -86,9 +116,24 @@ const Auth = () => {
         )}
         {authMode === 'login' && (
           <div className={styles.SignInContainer}>
-            <button onClick={onClickEmailJoin}>E-Mail 회원가입</button>
-            <button>Github 회원가입</button>
-            <button>Google 회원가입</button>
+            <button type="button" onClick={onClickEmailJoin}>
+              <div className={styles.BtnIcon}>
+                <FontAwesomeIcon icon={faEnvelope} />
+              </div>
+              E-Mail 회원가입
+            </button>
+            <button type="button" onClick={() => onClickSocialJoin('github')}>
+              <div className={styles.BtnIcon}>
+                <FontAwesomeIcon icon={faGithub} />
+              </div>
+              Github 로그인
+            </button>
+            <button type="button" onClick={() => onClickSocialJoin('google')}>
+              <div className={styles.BtnIcon}>
+                <FontAwesomeIcon icon={faGoogle} />
+              </div>
+              Google 로그인
+            </button>
           </div>
         )}
       </form>

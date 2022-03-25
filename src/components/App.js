@@ -4,6 +4,7 @@ import 'style.css';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import Loading from './Loading/Loading';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
@@ -11,7 +12,11 @@ function App() {
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) setIsLogin(true);
+      if (user) {
+        setIsLogin(true);
+      } else {
+        setIsLogin(false);
+      }
       setAppInit(true); // 유저상태 업데이트 완료.
     });
   }, []);

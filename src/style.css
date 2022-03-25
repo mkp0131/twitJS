@@ -33,11 +33,15 @@ button {
   font-weight: 100;
   box-sizing: border-box;
 }
-
+svg {
+  width: 100% !important;
+  height: auto !important;
+  vertical-align: top;
+}
 .app_contaier {
   display: grid;
   grid-template-rows: auto 100px;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .app_contaier footer {
@@ -54,4 +58,5 @@ button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 3em 10px;
 }
