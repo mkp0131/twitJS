@@ -1,0 +1,16 @@
+.Nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  box-sizing: border-box;
+  background: rgba(0, 119, 255, 0.1);
+}
+
+.Logo {
+  width: 30px;
+}
+.Logo svg path {
+  fill: var(--main-color1);
+}

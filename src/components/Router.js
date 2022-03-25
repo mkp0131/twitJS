@@ -7,13 +7,11 @@ import {
   Redirect,
 } from 'react-router-dom';
 import Auth from 'routes/Auth/Auth';
-import Home from 'routes/Home';
+import Home from 'routes/Home/Home';
 import Profile from 'routes/Profile/Profile';
-import Navigation from 'components/Navigation';
+import Navigation from 'components/Navigation/Navigation';
 
 const AppRouter = ({ isLogin }) => {
-  console.log(isLogin);
-
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>

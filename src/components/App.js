@@ -25,7 +25,9 @@ function App() {
     <>
       {appInit ? (
         <>
-          <AppRouter isLogin={isLogin} />
+          <div className="main-container">
+            <AppRouter isLogin={isLogin} />
+          </div>
           <footer>&copy; {new Date().getFullYear()} twitJS</footer>
         </>
       ) : (
