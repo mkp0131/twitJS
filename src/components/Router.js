@@ -15,7 +15,7 @@ const AppRouter = ({ isLogin }) => {
   console.log(isLogin);
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         {isLogin ? (
           <>
