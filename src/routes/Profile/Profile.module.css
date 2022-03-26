@@ -37,6 +37,7 @@
 
 .MyName {
   margin-top: 1em;
+  max-width: 360px;
 }
 .MyName input {
   font-size: 2rem;
@@ -49,7 +50,7 @@
   outline: none;
   box-sizing: border-box;
   border-bottom: 1px solid transparent;
-  width: auto;
+  width: 100%;
 }
 .MyName input:focus {
   border-bottom: 1px solid var(--main-color1);

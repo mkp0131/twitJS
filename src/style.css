@@ -50,6 +50,7 @@ ul {
 }
 textarea {
   margin: 0;
+  border-radius: 0;
 }
 label {
   cursor: pointer;

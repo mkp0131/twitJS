@@ -1,12 +1,12 @@
-import app, { auth, storage } from 'fbInstance';
+import { auth, storage, db } from 'fbInstance';
 import { signOut } from 'firebase/auth';
 import { useState } from 'react';
 import styles from './Profile.module.css';
-import { getAuth, updateProfile, updateCurrentUser } from 'firebase/auth';
-import { async } from '@firebase/util';
+import { updateProfile } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { doc, updateDoc } from 'firebase/firestore';
 
 const onClickLogout = () => {
   signOut(auth);
@@ -28,7 +28,13 @@ const Profile = ({ userObj, refleshUser }) => {
     event.preventDefault();
     event.target.querySelector('input').blur();
 
+    if (displayName === userObj.displayName) return;
+
     await updateProfile(auth.currentUser, {
+      displayName,
+    });
+
+    await updateDoc(doc(db, 'users', userObj.uid), {
       displayName,
     });
 
@@ -41,6 +47,12 @@ const Profile = ({ userObj, refleshUser }) => {
     } = event;
 
     if (!files) return;
+
+    const maxSize = 7340032; //파일 맥스 사이즈 7MB
+    if (files[0].size >= maxSize) {
+      alert('7메가 이상의 파일은 업로드가 불가합니다.');
+      return;
+    }
 
     var fileReader = new FileReader();
     fileReader.readAsDataURL(files[0]);
@@ -57,7 +69,9 @@ const Profile = ({ userObj, refleshUser }) => {
       await updateProfile(auth.currentUser, {
         photoURL: attachmentUrl,
       });
-
+      await updateDoc(doc(db, 'users', userObj.uid), {
+        photoURL: attachmentUrl,
+      });
       setProfileImg(attachmentUrl);
       refleshUser();
     };
@@ -75,7 +89,7 @@ const Profile = ({ userObj, refleshUser }) => {
       <form className={styles.MyName} onSubmit={onSubmit}>
         <input
           type="text"
-          value={displayName || '별명을 정해주세요.'}
+          value={displayName ?? '별명을 정해주세요.'}
           onChange={onChange}
         />
       </form>

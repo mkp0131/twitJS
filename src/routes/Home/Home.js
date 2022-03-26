@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
 import styles from './Home.module.css';
-import { auth, db } from 'fbInstance';
+import { db } from 'fbInstance';
 import {
   collection,
   addDoc,
-  setDoc,
-  getDocs,
   query,
   where,
   orderBy,
   limit,
-  doc,
   onSnapshot,
 } from 'firebase/firestore';
 import Twit from 'components/Twit/Twit';
@@ -28,19 +25,23 @@ const Home = ({ userObj }) => {
     cl,
     where('delete', '==', 'N'),
     orderBy('createdAt', 'desc'),
-    limit(10)
+    limit(20)
   );
 
   useEffect(() => {
     onSnapshot(qr, (data) => {
       let result = [];
-      data.forEach((doc) => {
+      data.forEach(async (ad) => {
+        const adData = ad.data();
+
         result.push({
-          id: doc.id,
-          ...doc.data(),
+          id: ad.id,
+          // displayName: userData.displayName,
+          // photoURL: userData.photoURL,
+          ...adData,
         });
       });
-      console.log(result);
+
       setTwitList(result);
     });
 

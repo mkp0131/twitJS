@@ -1,4 +1,4 @@
-import { auth } from 'fbInstance';
+import { auth, db } from 'fbInstance';
 import {
   signInWithPopup,
   GithubAuthProvider,
@@ -8,15 +8,11 @@ import {
 } from 'firebase/auth';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGithub,
-  faGoogle,
-  faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faAt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import styles from './Auth.module.css';
 import Logo from 'components/Logo';
-import { async } from '@firebase/util';
+import { setDoc, doc } from 'firebase/firestore';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -41,7 +37,21 @@ const Auth = () => {
         await signInWithEmailAndPassword(auth, email, password);
       } else if (authMode === 'join') {
         // 회원가입
-        await createUserWithEmailAndPassword(auth, email, password);
+        const createUser = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+        // 유저 데이터 생성
+        await setDoc(doc(db, 'users', createUser.user.uid), {
+          uid: createUser.user.uid,
+          email: createUser.user.email,
+          displayName: createUser.user.displayName || '별명을 정해주세요.',
+          photoURL: createUser.user.photoURL || '/logo192.png',
+          createdAt: createUser.user.metadata.createdAt,
+          delete: 'N',
+        });
       }
     } catch (error) {
       setAuthErr(error.message);

@@ -68,3 +68,26 @@
 .TwitBtnContainer button:last-child {
   color: var(--font-color2);
 }
+
+.twitCreator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.5em;
+}
+.Writer {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: var(--main-color1);
+}
+.Writer img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.twitDate {
+  font-size: 12px;
+  color: #666;
+}

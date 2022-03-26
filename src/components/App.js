@@ -1,4 +1,4 @@
-import fbInstance, { auth } from 'fbInstance';
+import { auth } from 'fbInstance';
 import AppRouter from 'components/Router';
 import 'style.css';
 import { useEffect, useState } from 'react';

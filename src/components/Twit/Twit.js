@@ -1,25 +1,23 @@
 import { auth, db } from 'fbInstance';
-import {
-  collection,
-  addDoc,
-  setDoc,
-  getDocs,
-  updateDoc,
-  query,
-  where,
-  orderBy,
-  limit,
-  doc,
-  onSnapshot,
-} from 'firebase/firestore';
-import { getAuth, getAdditionalUserInfo } from 'firebase/auth';
-import { useState } from 'react';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import styles from './Twit.module.css';
-import { async } from '@firebase/util';
 
 const Twit = ({ twit, userUid }) => {
   const [editMode, setEditMode] = useState(false);
   const [editTwit, setEditTwit] = useState('');
+  const [writer, setWriter] = useState('');
+  const [photoURL, setPhotoURL] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      const writerDoc = await getDoc(doc(db, 'users', twit.creatorId));
+      const writerData = writerDoc.data();
+
+      setWriter(writerData.displayName);
+      setPhotoURL(writerData.photoURL);
+    })();
+  }, []);
 
   const onClickDelete = async (event, twit) => {
     event.preventDefault();
@@ -61,17 +59,14 @@ const Twit = ({ twit, userUid }) => {
     (twitDate.getMonth() + 1)
   ).slice(-2)}.${('00' + twitDate.getDate()).slice(-2)}`;
 
-  const getProfile = async (uid) => {
-    // const result = await getAuth().getUser(uid);
-    // console.log(result);
-  };
-
-  getProfile(twit.creatorId);
   return (
     <li className={`${styles.Twit} ${editMode && styles.TwitModify}`}>
       <ul className={styles.twitCreator}>
-        <li>작성자: {twit.creatorId}</li>
-        <li>작성일: {twitDateTxt}</li>
+        <li className={styles.Writer}>
+          <img src={photoURL || '/logo192.png'} />
+          {writer}
+        </li>
+        <li className={styles.twitDate}>작성일: {twitDateTxt}</li>
       </ul>
       <div className={styles.TwitTxt}>{twit.twit}</div>
       <div className={styles.ModifyContainer}>
