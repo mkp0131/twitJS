@@ -9,8 +9,10 @@ const Navigation = ({ userObj }) => {
         <Logo className={styles.Logo} />
       </Link>
       <Link to="/profile" className={styles.BtnProfile}>
-        <img src={userObj?.photoURL || '/logo192.png'} />
-        {userObj?.displayName ? userObj.displayName : '별명을 정해주세요.'}
+        <img src={userObj?.photoURL || process.env.REACT_APP_DEFAULT_IMG} />
+        {userObj?.displayName
+          ? userObj.displayName
+          : process.env.REACT_APP_DEFAULT_DISPLAYNAME}
       </Link>
     </nav>
   );

@@ -80,7 +80,7 @@ const Profile = ({ userObj, refleshUser }) => {
   return (
     <div className="ct-container">
       <div className={styles.MyPhoto}>
-        <img src={profileImg || '/logo192.png'} />
+        <img src={profileImg || process.env.REACT_APP_DEFAULT_IMG} />
         <label className={styles.BtnPhotoEdit}>
           <input type="file" accept="image/*" onChange={onChangeFile} />
           <FontAwesomeIcon icon={faPen} />
@@ -89,7 +89,7 @@ const Profile = ({ userObj, refleshUser }) => {
       <form className={styles.MyName} onSubmit={onSubmit}>
         <input
           type="text"
-          value={displayName ?? '별명을 정해주세요.'}
+          value={displayName ?? process.env.REACT_APP_DEFAULT_DISPLAYNAME}
           onChange={onChange}
         />
       </form>

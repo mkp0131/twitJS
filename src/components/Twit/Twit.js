@@ -63,7 +63,7 @@ const Twit = ({ twit, userUid }) => {
     <li className={`${styles.Twit} ${editMode && styles.TwitModify}`}>
       <ul className={styles.twitCreator}>
         <li className={styles.Writer}>
-          <img src={photoURL || '/logo192.png'} />
+          <img src={photoURL || process.env.REACT_APP_DEFAULT_IMG} />
           {writer}
         </li>
         <li className={styles.twitDate}>작성일: {twitDateTxt}</li>
