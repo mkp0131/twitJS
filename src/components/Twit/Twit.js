@@ -2,6 +2,7 @@ import { auth, db } from 'fbInstance';
 import { updateDoc, doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import styles from './Twit.module.css';
+import { USER_DEFAULT_DISPLAYNAME, USER_DEFAULT_PHOTOURL } from 'userSetting';
 
 const Twit = ({ twit, userUid }) => {
   const [editMode, setEditMode] = useState(false);
@@ -63,7 +64,7 @@ const Twit = ({ twit, userUid }) => {
     <li className={`${styles.Twit} ${editMode && styles.TwitModify}`}>
       <ul className={styles.twitCreator}>
         <li className={styles.Writer}>
-          <img src={photoURL || process.env.REACT_APP_DEFAULT_IMG} />
+          <img src={photoURL || USER_DEFAULT_PHOTOURL} />
           {writer}
         </li>
         <li className={styles.twitDate}>작성일: {twitDateTxt}</li>

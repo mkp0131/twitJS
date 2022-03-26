@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
+import { USER_DEFAULT_DISPLAYNAME, USER_DEFAULT_PHOTOURL } from 'userSetting';
 
 const onClickLogout = () => {
   signOut(auth);
@@ -80,7 +81,7 @@ const Profile = ({ userObj, refleshUser }) => {
   return (
     <div className="ct-container">
       <div className={styles.MyPhoto}>
-        <img src={profileImg || process.env.REACT_APP_DEFAULT_IMG} />
+        <img src={profileImg || USER_DEFAULT_PHOTOURL} />
         <label className={styles.BtnPhotoEdit}>
           <input type="file" accept="image/*" onChange={onChangeFile} />
           <FontAwesomeIcon icon={faPen} />
@@ -89,7 +90,7 @@ const Profile = ({ userObj, refleshUser }) => {
       <form className={styles.MyName} onSubmit={onSubmit}>
         <input
           type="text"
-          value={displayName ?? process.env.REACT_APP_DEFAULT_DISPLAYNAME}
+          value={displayName ?? USER_DEFAULT_DISPLAYNAME}
           onChange={onChange}
         />
       </form>
