@@ -88,7 +88,16 @@ const Auth = () => {
 
     // 회원가입 처리
     try {
-      const signResult = await signInWithPopup(auth, provider);
+      const createUser = await signInWithPopup(auth, provider);
+      // 유저 데이터 생성
+      await setDoc(doc(db, 'users', createUser.user.uid), {
+        uid: createUser.user.uid,
+        email: createUser.user.email,
+        displayName: createUser.user.displayName || USER_DEFAULT_DISPLAYNAME,
+        photoURL: createUser.user.photoURL || USER_DEFAULT_PHOTOURL,
+        createdAt: createUser.user.metadata.createdAt,
+        delete: 'N',
+      });
     } catch (error) {
       setAuthErr(error.message);
     }
