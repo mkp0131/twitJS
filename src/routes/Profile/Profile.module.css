@@ -1,0 +1,63 @@
+.MyPhoto {
+  width: 130px;
+  height: 130px;
+  position: relative;
+}
+.MyPhoto img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.BtnPhotoEdit {
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+  border-radius: 50%;
+  background: var(--main-color1);
+  width: 30px;
+  height: 30px;
+  display: block;
+  padding: 0.5em;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.BtnPhotoEdit input {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.MyName {
+  margin-top: 1em;
+}
+.MyName input {
+  font-size: 2rem;
+  text-align: center;
+  background: transparent;
+  border: none;
+  color: var(--font-color1);
+  font-weight: 700;
+  border-radius: 0;
+  outline: none;
+  box-sizing: border-box;
+  border-bottom: 1px solid transparent;
+  width: auto;
+}
+.MyName input:focus {
+  border-bottom: 1px solid var(--main-color1);
+}
+
+.BtnLogout {
+  margin-top: 1em;
+  background: var(--font-color2);
+  padding: 1em;
+  color: #fff;
+}

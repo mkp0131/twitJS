@@ -11,18 +11,18 @@ import Home from 'routes/Home/Home';
 import Profile from 'routes/Profile/Profile';
 import Navigation from 'components/Navigation/Navigation';
 
-const AppRouter = ({ isLogin }) => {
+const AppRouter = ({ isLogin, userObj, refleshUser }) => {
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         {isLogin ? (
           <>
-            <Navigation />
+            <Navigation userObj={userObj} />
             <Route exact path="/profile">
-              <Profile />
+              <Profile userObj={userObj} refleshUser={refleshUser} />
             </Route>
             <Route exact path="/">
-              <Home />
+              <Home userObj={userObj} />
             </Route>
           </>
         ) : (

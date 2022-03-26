@@ -15,12 +15,12 @@ import {
 } from 'firebase/firestore';
 import Twit from 'components/Twit/Twit';
 
-const Home = () => {
+const Home = ({ userObj }) => {
   const [twit, setTwit] = useState('');
   const [twitList, setTwitList] = useState([]);
 
   // userUid
-  const userUid = auth.currentUser?.uid;
+  const userUid = userObj?.uid;
   // db collection
   const cl = collection(db, 'twits');
 
@@ -32,7 +32,7 @@ const Home = () => {
   );
 
   useEffect(() => {
-    const unsub = onSnapshot(qr, (data) => {
+    onSnapshot(qr, (data) => {
       let result = [];
       data.forEach((doc) => {
         result.push({
@@ -40,8 +40,11 @@ const Home = () => {
           ...doc.data(),
         });
       });
+      console.log(result);
       setTwitList(result);
     });
+
+    return () => setTwitList([]);
   }, []);
 
   const onChange = (event) => {

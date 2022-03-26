@@ -12,8 +12,10 @@ import {
   doc,
   onSnapshot,
 } from 'firebase/firestore';
+import { getAuth, getAdditionalUserInfo } from 'firebase/auth';
 import { useState } from 'react';
 import styles from './Twit.module.css';
+import { async } from '@firebase/util';
 
 const Twit = ({ twit, userUid }) => {
   const [editMode, setEditMode] = useState(false);
@@ -59,6 +61,12 @@ const Twit = ({ twit, userUid }) => {
     (twitDate.getMonth() + 1)
   ).slice(-2)}.${('00' + twitDate.getDate()).slice(-2)}`;
 
+  const getProfile = async (uid) => {
+    // const result = await getAuth().getUser(uid);
+    // console.log(result);
+  };
+
+  getProfile(twit.creatorId);
   return (
     <li className={`${styles.Twit} ${editMode && styles.TwitModify}`}>
       <ul className={styles.twitCreator}>

@@ -14,3 +14,17 @@
 .Logo svg path {
   fill: var(--main-color1);
 }
+
+.BtnProfile {
+  display: flex;
+  align-items: center;
+  color: var(--font-color1);
+  text-decoration: none;
+  font-weight: 700;
+}
+.BtnProfile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}

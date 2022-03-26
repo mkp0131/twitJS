@@ -40,9 +40,19 @@ svg {
   height: auto !important;
   vertical-align: top;
 }
+img {
+  width: 100%;
+  vertical-align: top;
+}
 ul {
   list-style: none;
   padding: 0;
+}
+textarea {
+  margin: 0;
+}
+label {
+  cursor: pointer;
 }
 
 .app_contaier {
