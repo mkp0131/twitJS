@@ -4,7 +4,6 @@ import 'style.css';
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import Loading from './Loading/Loading';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);

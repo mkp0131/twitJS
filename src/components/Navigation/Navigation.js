@@ -9,8 +9,8 @@ const Navigation = ({ userObj }) => {
         <Logo className={styles.Logo} />
       </Link>
       <Link to="/profile" className={styles.BtnProfile}>
-        <img src={userObj.photoURL} />
-        {userObj.displayName}
+        <img src={userObj?.photoURL || '/logo192.png'} />
+        {userObj?.displayName ? userObj.displayName : '별명을 정해주세요.'}
       </Link>
     </nav>
   );
