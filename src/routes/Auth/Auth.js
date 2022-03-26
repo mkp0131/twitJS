@@ -13,6 +13,7 @@ import { faAt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import styles from './Auth.module.css';
 import Logo from 'components/Logo';
 import { setDoc, doc } from 'firebase/firestore';
+import { USER_DEFAULT_DISPLAYNAME, USER_DEFAULT_PHOTOURL } from 'userSetting';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -47,8 +48,8 @@ const Auth = () => {
         await setDoc(doc(db, 'users', createUser.user.uid), {
           uid: createUser.user.uid,
           email: createUser.user.email,
-          displayName: createUser.user.displayName || '별명을 정해주세요.',
-          photoURL: createUser.user.photoURL || '/logo192.png',
+          displayName: createUser.user.displayName || USER_DEFAULT_DISPLAYNAME,
+          photoURL: createUser.user.photoURL || USER_DEFAULT_PHOTOURL,
           createdAt: createUser.user.metadata.createdAt,
           delete: 'N',
         });

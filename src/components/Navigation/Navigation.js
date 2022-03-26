@@ -10,7 +10,7 @@ const Navigation = ({ userObj }) => {
         <Logo className={styles.Logo} />
       </Link>
       <Link to="/profile" className={styles.BtnProfile}>
-        <img src={userObj?.photoURL ?? USER_DEFAULT_PHOTOURL} />
+        <img src={userObj?.photoURL || USER_DEFAULT_PHOTOURL} />
         {userObj?.displayName ? userObj.displayName : USER_DEFAULT_DISPLAYNAME}
       </Link>
     </nav>
